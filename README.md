@@ -1,3 +1,73 @@
+<div align="center">
+# 🌙 Lunar Tracker
+ 
+**The officially declared Hijri date for Nigeria, as an API.**
+ 
+![Next.js](https://img.shields.io/badge/Next.js-000000?logo=nextdotjs&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
+![Focus](https://img.shields.io/badge/focus-Nigeria-008751)
+![Status](https://img.shields.io/badge/status-in%20development-orange)
+ 
+</div>
+---
+ 
+## About
+ 
+Most Hijri date APIs work out the date by calculation. Nigeria doesn't: each Islamic month begins when the crescent is sighted, and the Sultan of Sokoto announces the result on the advice of the National Moonsighting Committee. Calculated dates don't always match what Nigeria announces.
+ 
+Lunar Tracker treats the **officially declared month start** as its source of truth, counts the days from there, and serves the result through a simple API and a calendar page.
+ 
+> [!NOTE]
+> This is an independent project. It is not affiliated with NSCIA or the National Moonsighting Committee.
+ 
+## Features
+ 
+| Feature | Status |
+|---|---|
+| Hijri date counted from the declared month start | ✅ Available |
+| Month calendar showing Hijri and Gregorian days( spanning across two months ) side by side | ✅ Available |
+| JSON API (`/api/date`) | ✅ Available |
+| Shareable announcement OG( open graph ) for WhatsApp Status | 📅 Coming up |
+| Telegram automation and web notifications | 📅 Coming up |
+ 
+<details>
+<summary>Example API response</summary>
+```json
+{
+  "gregorian": {
+    "enDayOfWeek": "Friday",
+    "gregorianDate": "2026-10-16"
+  },
+  "hijri": {
+    "hijriDay": 5,
+    "arDayOfWeek": "الجمعة",
+    "month": "Jumada Al-Ula",
+    "year": 1448
+  }
+}
+```
+ 
+</details>
+## Quick start
+ 
+```bash
+git clone https://github.com/your-username/lunartracker.git
+cd lunartracker
+npm install
+npm run dev
+```
+ 
+Then open [http://localhost:3000](http://localhost:3000).
+ 
+---
+ 
+<div align="center" >
+**Built by Muhammad Dev**
+ 
+</div>
+
+---
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
