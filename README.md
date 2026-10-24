@@ -61,10 +61,7 @@ Then open [http://localhost:3000](http://localhost:3000).
  
 ---
  
-<div align="center" >
 **Built by Muhammad Dev**
- 
-</div>
 
 ---
 
