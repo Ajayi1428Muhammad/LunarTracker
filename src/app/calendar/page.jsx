@@ -1,21 +1,61 @@
+"use client";
+
+import { Suspense } from "react";
 import { monthCalendar } from "@/lib/date";
 
-const Calendar = () => {
-    const {
-      hijriDay,
-      hijriMonth,
-      gregMonth,
-      startDayIndex,
-      nextGregMonth,
-      startDay,
-      startDate,
-      endDay,
-      endYear,
-      nextMonth,
-    } = monthCalendar();
-    const days = ["M", "T", "W", "T", "F", "S", "S"];
-    const startDayIndices = startDayIndex === 0 ? 6 : startDayIndex - 1; 
-    const today = hijriDay
+const calendarResource = (() => {
+  let status = "pending";
+  let result = null;
+  let promise = null;
+
+  return {
+    read() {
+      if (status === "success") {
+        return result;
+      }
+
+      if (!promise) {
+        promise = new Promise((resolve) => {
+          setTimeout(() => {
+            result = monthCalendar();
+            status = "success";
+            resolve(result);
+          }, 0);
+        });
+      }
+
+      throw promise;
+    },
+  };
+})();
+
+const CalendarSkeleton = () => (
+  <div className="m-4 mx-auto max-w-140 p-4">
+    <div className="animate-pulse rounded-lg bg-neutral-900/60 border border-neutral-800/80 p-6">
+      <div className="h-8 w-52 rounded bg-neutral-800/80" />
+      <div className="mt-3 h-8 w-72 rounded bg-neutral-800/80" />
+      <div className="mt-6 h-64 w-full rounded bg-neutral-800/80" />
+    </div>
+  </div>
+);
+
+const CalendarContent = () => {
+  const {
+    hijriDay,
+    hijriMonth,
+    gregMonth,
+    startDayIndex,
+    nextGregMonth,
+    startDay,
+    startDate,
+    endDay,
+    endYear,
+    nextMonth,
+  } = calendarResource.read();
+
+  const days = ["M", "T", "W", "T", "F", "S", "S"];
+  const startDayIndices = startDayIndex === 0 ? 6 : startDayIndex - 1;
+  const today = hijriDay;
 
   return (
     <div className="m-4 mx-auto max-w-140 p-4 ">
@@ -41,8 +81,8 @@ const Calendar = () => {
             ))}
             {[...Array(30)].map((_, i) => {
               const currentGregDay = new Date(startDate);
-              currentGregDay.setUTCDate(startDate.getUTCDate() + i);
-              const gregDay = currentGregDay.getUTCDate();
+              currentGregDay.setDate(startDate.getDate() + i);
+              const gregDay = currentGregDay.getDate();
               const currentDay = i + 1;
               const isToday = currentDay === today;
               const day30 = i === 29;
@@ -81,11 +121,18 @@ const Calendar = () => {
       <div className="mt-6">
         <span className="font-bold text-neutral-400">
           Day 30 is tentative so if the moon is sighted on the night of 29th,
-          the next day becomes the first of {nextMonth}, else it remains the 30th of {hijriMonth}.
+          the next day becomes the first of {nextMonth}, else it remains the
+          30th of {hijriMonth}.
         </span>
       </div>
     </div>
   );
-}
+};
 
-export default Calendar
+const Calendar = () => (
+  <Suspense fallback={<CalendarSkeleton />}>
+    <CalendarContent />
+  </Suspense>
+);
+
+export default Calendar;
