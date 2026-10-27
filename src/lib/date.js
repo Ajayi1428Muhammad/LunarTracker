@@ -14,7 +14,17 @@ const getLocalDateString = (date) => {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
-  return `${year}-${month}-${day}`;
+  const monthName = date.toLocaleString("en-GB", {
+    month: "long",
+    timeZone: "Africa/Lagos",
+  });
+  return {
+    year,
+    month,
+    day,
+    monthName,
+    gregorianDate: `${day}-${month}-${year}`,
+  };
 };
 
 const getCurrentMonth = () => MONTHSTART[0];

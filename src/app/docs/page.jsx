@@ -20,3 +20,8 @@ const  Doc = () => {
 }
 
 export default Doc
+
+export const metadata = {
+  title: "Calendar",
+  description: "The Hijri month with its Gregorian dates side by side.",
+};

@@ -1,11 +1,11 @@
 const FetchDoc = () => {
-  const curlExample = `curl -X GET "https://yourdomain.com/api/date" \\
+  const curlExample = `curl -X GET "https://lunartracker-ng.vercel.app/api/date" \\
   -H "Accept: application/json"`;
 
   const jsFetchExample = `// Client-side JavaScript / React
 async function getLunarDate() {
   try {
-    const {res} = await fetch("https://yourdomain.com/api/date");
+    const {res} = await fetch("https://lunartracker-ng.vercel.app/api/date");
     if (!res.ok) throw new Error("Failed to fetch lunar date");
 
     const data = await res.json();

@@ -35,7 +35,7 @@ const Endpoint = () => {
           <div className="p-3 rounded-lg bg-neutral-900/60 border border-neutral-800/80">
             <span className="text-neutral-500 block mb-1">Base URL</span>
             <span className="text-neutral-200 font-mono">
-              https://yourdomain.com
+              https://lunartracker-ng.vercel.app/
             </span>
           </div>
           <div className="p-3 rounded-lg bg-neutral-900/60 border border-neutral-800/80">

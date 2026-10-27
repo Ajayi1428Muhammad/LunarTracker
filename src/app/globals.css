@@ -10,6 +10,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-moderno: var(--font-museo-moderno);
   --breakpoint-ms: 480px;
 }
 

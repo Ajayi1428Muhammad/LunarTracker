@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, MuseoModerno } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/app/components/Navbar";
 import { Analytics } from "@vercel/analytics/next";
@@ -13,6 +13,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const museoModerno = MuseoModerno({
+  variable: "--font-museo-moderno",
+  subsets: ["latin"],
+});
+
 export const metadata = {
   title: "Lunar Tracker",
   description: "Track Moon according to Local Update",
@@ -22,7 +27,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${museoModerno.variable} h-full antialiased`}
     >
       <body className="min-h-full flex overflow-y-auto scrollbar-none overflow-x-hidden ">
         <Navbar />
