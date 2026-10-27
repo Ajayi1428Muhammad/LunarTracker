@@ -26,7 +26,7 @@ const DateView = ({ gregorian, hijri }) => {
   return (
     <div className="w-full max-w-full overflow-hidden">
       <div className="flex flex-col">
-        <div className="mb-2 flex w-full items-stretch gap-2 sm:gap-4">
+        <div className="mb-2 grid grid-cols-2 ms:grid-cols-3 w-full items-stretch gap-2 sm:gap-4">
           <button
             className={`${pill} ${view === "hijri" ? "bg-white/20" : ""}`}
             onClick={() => setView("hijri")}
