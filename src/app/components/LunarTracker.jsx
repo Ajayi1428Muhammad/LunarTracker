@@ -17,7 +17,9 @@ async function TrackerContent () {
           <div className="-mx-6 h-px bg-linear-to-r from-transparent via-white/50 to-transparent my-4 " />
           <h1 className="text-9xl">{hijri.hijriDay}</h1>
         </div>
+        <div className="w-[calc(100%-4rem)]  mx-auto">
         <DateView gregorian={gregorian} hijri={hijri} />
+        </div>
       </div>
     );
 }

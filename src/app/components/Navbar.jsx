@@ -17,7 +17,7 @@ const Navbar = () => {
     <div className="fixed right-4 top-1/2 -translate-y-1/2 z-50 flex  items-center justify-center overflow-hidden transition-all">
       <div>
         <div onClick={() => setMenuOpen(!menuOpen)}
-          className="flex justify-center bg-white/10 p-3 cursor-pointer mb-4 rounded-xl"
+          className="flex justify-center bg-white/20 p-3 cursor-pointer mb-4 rounded-xl"
           title="Menu"
         >
           <Bars3Icon className="h-6 w-6 " />
