@@ -5,6 +5,7 @@ import {
   MoonIcon,
   ClipboardIcon,
   CheckIcon,
+  ShareIcon
 } from "@heroicons/react/24/outline";
 import { div } from "motion/react-client";
 
@@ -20,7 +21,6 @@ const DateView = ({ gregorian, hijri }) => {
   const getShareText = () => {
     const visibleText = dateTextRef.current.innerText;
     return `${visibleText} \n\n ©️ ${siteName} (${siteUrl})`;
-
   }
   const handleCopy = () => {
     navigator.clipboard.writeText(getShareText());
@@ -29,6 +29,22 @@ const DateView = ({ gregorian, hijri }) => {
       setCopied(false);
     }, 2000);
   };
+
+  const handleShare = async () => {
+    if(navigator.share) {
+      try {
+        await navigator.share({
+          title: siteName,
+          text: getShareText(),
+          url: siteUrl
+        })
+      } catch (error) {
+        console.error("error sharing:", error);
+      }
+    } else {
+      handleCopy();
+    }
+  }
   return (
     <div className="w-full max-w-full overflow-hidden">
       <div className="flex flex-col">
@@ -58,15 +74,25 @@ const DateView = ({ gregorian, hijri }) => {
         </div>
         {view === "hijri" && (
           <div className="relative bg-white/10 p-12 rounded-xl border border-white/15 backdrop-blur-3xl">
-            <div className="fixed top-4 right-4 transition-all ease-in-out">
-              {copied ? (
-                <CheckIcon className="w-4 h-4" />
-              ) : (
-                <ClipboardIcon
+            <div className="fixed top-4 right-4 flex gap-2">
+              <div>
+                <ShareIcon
                   className="w-4 h-4 cursor-pointer"
-                  onClick={handleCopy}
+                  onClick={handleShare}
+                  title="Share"
                 />
-              )}
+              </div>
+              <div className=" transition-all ease-in-out">
+                {copied ? (
+                  <CheckIcon className="w-4 h-4" />
+                ) : (
+                  <ClipboardIcon
+                    className="w-4 h-4 cursor-pointer"
+                    onClick={handleCopy}
+                    title="Copy to clipboard"
+                  />
+                )}
+              </div>
             </div>
             <p ref={dateTextRef}>
               Today's date is{" "}
