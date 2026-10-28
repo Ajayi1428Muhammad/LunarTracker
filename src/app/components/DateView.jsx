@@ -18,12 +18,17 @@ const DateView = ({ gregorian, hijri }) => {
   const dateTextRef = useRef(null);
   const siteUrl = "https://lunartracker-ng.vercel.app";
   const siteName = "LunarTracker";
-  const getShareText = () => {
+  const getText = () => {
     const visibleText = dateTextRef.current.innerText;
     return `${visibleText} \n\n ©️ ${siteName} (${siteUrl})`;
   }
+  const getShareText = () => {
+    const visibleText = dateTextRef.current.innerText;
+    return `${visibleText} \n\n ©️ ${siteName} \n`;
+  }
+
   const handleCopy = () => {
-    navigator.clipboard.writeText(getShareText());
+    navigator.clipboard.writeText(getText());
     setCopied(true);
     setTimeout(() => {
       setCopied(false);
