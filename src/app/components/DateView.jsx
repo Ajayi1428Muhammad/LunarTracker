@@ -32,7 +32,7 @@ const DateView = ({ gregorian, hijri }) => {
     try {
       const blob = await toBlob(cardRef.current, {
         cacheBust: true,
-        pixelRatio: 2, 
+        pixelRatio: 1, 
       });
 
       if (!blob) throw new Error("Blob generation failed");
@@ -84,11 +84,11 @@ const DateView = ({ gregorian, hijri }) => {
   }
   return (
     <div className="mb-2">
-      <div className="flex justify-end mr-2 mb-2 ">
+      <div className="flex justify-end mr-2 mb-2">
         <button
           onClick={handleCopyImage}
           disabled={copyingShot}
-          className="flex items-center gap-2 px-4 py-2 bg-white text-black text-xs font-semibold rounded-xs hover:bg-neutral-200 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+          className="flex items-center gap-2 px-4 py-2 bg-white/50 text-black text-xs font-semibold rounded-lg border-t border-white/20 hover:bg-neutral-600 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
         >
           {copiedShot ? (
             <>
@@ -105,126 +105,125 @@ const DateView = ({ gregorian, hijri }) => {
           )}
         </button>
       </div>
-      <div
-        className="flex flex-col justify-center items-center bg-black/10 p-4 border rounded-xl border-white/20"
-        ref={cardRef}
-      >
-        {/* DateHead */}
-        <div className="bg-white/10 p-8 rounded-xl mb-3">
-          <div className="text-lg font-bold flex justify-center">
-            {hijri.arDayOfWeek}
+      <div className="p-5 max-w-md" ref={cardRef}>
+        <div className="flex flex-col justify-center items-center bg-black/10 p-4 border rounded-xl border-white/20">
+          {/* DateHead */}
+          <div className="bg-white/10 p-8 rounded-xl mb-3">
+            <div className="text-sm md:textlg font-bold flex justify-center">
+              {hijri.arDayOfWeek}
+            </div>
+            <div className="-mx-6 h-px bg-linear-to-r from-transparent via-white/50 to-transparent my-4 " />
+            <h1 className="md:text-9xl text-4xl">{hijri.hijriDay}</h1>
           </div>
-          <div className="-mx-6 h-px bg-linear-to-r from-transparent via-white/50 to-transparent my-4 " />
-          <h1 className="text-9xl">{hijri.hijriDay}</h1>
-        </div>
-        {/* DateView */}
-        <div className="w-[calc(100%-2rem)]  mx-auto">
-          <div className="w-full max-w-full overflow-hidden">
-            <div className="flex flex-col">
-              <div className="mb-2 grid grid-cols-2 ms:grid-cols-3 w-full items-stretch gap-2 sm:gap-4">
-                <button
-                  className={`${pill} ${view === "hijri" ? "bg-white/20" : ""}`}
-                  onClick={() => setView("hijri")}
-                >
-                  <MoonIcon className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" />
-                  <span className="truncate">Hijri</span>
-                </button>
-                <button
-                  className={`${pill} ${view === "gregorian" ? "bg-white/20" : ""}`}
-                  onClick={() => setView("gregorian")}
-                >
-                  <CalendarDaysIcon className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" />
-                  <span className="truncate">Gregorian</span>
-                </button>
-                <button
-                  className={`${pill} ${view === "both" ? "bg-white/20" : ""}`}
-                  onClick={() => setView("both")}
-                >
-                  <MoonIcon className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" />
-                  <CalendarDaysIcon className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" />
-                  <span className="truncate">Both</span>
-                </button>
-              </div>
-              {view === "hijri" && (
-                <div className="relative bg-white/10 p-12 rounded-xl border border-white/15 backdrop-blur-3xl">
-                  <div className="fixed top-4 right-4 flex gap-2">
-                    <div>
-                      <ShareIcon
-                        className="w-4 h-4 cursor-pointer"
-                        onClick={handleShare}
-                        title="Share"
-                      />
+          {/* DateView */}
+          <div className="w-[calc(100%-2rem)]  mx-auto">
+            <div className="w-full max-w-full overflow-hidden">
+              <div className="flex flex-col">
+                <div className="mb-2 grid grid-cols-2 ms:grid-cols-3 w-full items-stretch gap-2 sm:gap-4">
+                  <button
+                    className={`${pill} ${view === "hijri" ? "bg-white/20" : ""}`}
+                    onClick={() => setView("hijri")}
+                  >
+                    <MoonIcon className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" />
+                    <span className="truncate">Hijri</span>
+                  </button>
+                  <button
+                    className={`${pill} ${view === "gregorian" ? "bg-white/20" : ""}`}
+                    onClick={() => setView("gregorian")}
+                  >
+                    <CalendarDaysIcon className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" />
+                    <span className="truncate">Gregorian</span>
+                  </button>
+                  <button
+                    className={`${pill} ${view === "both" ? "bg-white/20" : ""}`}
+                    onClick={() => setView("both")}
+                  >
+                    <MoonIcon className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" />
+                    <CalendarDaysIcon className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" />
+                    <span className="truncate">Both</span>
+                  </button>
+                </div>
+                {view === "hijri" && (
+                  <div className="relative bg-white/10 p-12 rounded-xl border border-white/15 backdrop-blur-3xl">
+                    <div className="fixed top-4 right-4 flex gap-2">
+                      <div>
+                        <ShareIcon
+                          className="w-4 h-4 cursor-pointer"
+                          onClick={handleShare}
+                          title="Share"
+                        />
+                      </div>
+                      <div className=" transition-all ease-in-out">
+                        {copied ? (
+                          <CheckIcon className="w-4 h-4" />
+                        ) : (
+                          <ClipboardIcon
+                            className="w-4 h-4 cursor-pointer"
+                            onClick={handleCopy}
+                            title="Copy to clipboard"
+                          />
+                        )}
+                      </div>
                     </div>
-                    <div className=" transition-all ease-in-out">
+                    <p ref={dateTextRef}>
+                      Today's date is{" "}
+                      <span className="font-bold font-moderno">
+                        {gregorian.enDayOfWeek}, {hijri.hijriDay} {hijri.month}{" "}
+                        {hijri.year}AH
+                      </span>
+                    </p>
+                  </div>
+                )}
+                {view === "gregorian" && (
+                  <div className="relative bg-white/10 p-12 rounded-xl border border-white/15 backdrop-blur-3xl">
+                    <div className="fixed top-4 right-4">
                       {copied ? (
                         <CheckIcon className="w-4 h-4" />
                       ) : (
                         <ClipboardIcon
                           className="w-4 h-4 cursor-pointer"
                           onClick={handleCopy}
-                          title="Copy to clipboard"
                         />
                       )}
                     </div>
+                    <p ref={dateTextRef}></p>
+                    <p ref={dateTextRef}>
+                      Today's date is{" "}
+                      <span className="font-bold font-moderno">
+                        {" "}
+                        {gregorian.enDayOfWeek}, {gregorian.gregorianDate.day}
+                        th of {gregorian.gregorianDate.monthName}{" "}
+                        {gregorian.gregorianDate.year}CE
+                      </span>
+                    </p>
                   </div>
-                  <p ref={dateTextRef}>
-                    Today's date is{" "}
-                    <span className="font-bold font-moderno">
-                      {gregorian.enDayOfWeek}, {hijri.hijriDay} {hijri.month}{" "}
-                      {hijri.year}AH
-                    </span>
-                  </p>
-                </div>
-              )}
-              {view === "gregorian" && (
-                <div className="relative bg-white/10 p-12 rounded-xl border border-white/15 backdrop-blur-3xl">
-                  <div className="fixed top-4 right-4">
-                    {copied ? (
-                      <CheckIcon className="w-4 h-4" />
-                    ) : (
-                      <ClipboardIcon
-                        className="w-4 h-4 cursor-pointer"
-                        onClick={handleCopy}
-                      />
-                    )}
+                )}
+                {view === "both" && (
+                  <div className="relative bg-white/10 p-12 rounded-xl border border-white/15 backdrop-blur-3xl">
+                    <div className="fixed top-4 right-4">
+                      {copied ? (
+                        <CheckIcon className="w-4 h-4" />
+                      ) : (
+                        <ClipboardIcon
+                          className="w-4 h-4 cursor-pointer"
+                          onClick={handleCopy}
+                        />
+                      )}
+                    </div>
+                    <p ref={dateTextRef}>
+                      Today's date is{" "}
+                      <span className="font-bold font-moderno uppercase">
+                        {gregorian.enDayOfWeek}, {hijri.hijriDay} {hijri.month}{" "}
+                        {hijri.year}AH in correspondent to{" "}
+                        {gregorian.enDayOfWeek}, {gregorian.gregorianDate.day}th
+                        of {gregorian.gregorianDate.monthName}{" "}
+                        {gregorian.gregorianDate.year}
+                        CE
+                      </span>
+                    </p>
                   </div>
-                  <p ref={dateTextRef}></p>
-                  <p ref={dateTextRef}>
-                    Today's date is{" "}
-                    <span className="font-bold font-moderno">
-                      {" "}
-                      {gregorian.enDayOfWeek}, {gregorian.gregorianDate.day}
-                      th of {gregorian.gregorianDate.monthName}{" "}
-                      {gregorian.gregorianDate.year}CE
-                    </span>
-                  </p>
-                </div>
-              )}
-              {view === "both" && (
-                <div className="relative bg-white/10 p-12 rounded-xl border border-white/15 backdrop-blur-3xl">
-                  <div className="fixed top-4 right-4">
-                    {copied ? (
-                      <CheckIcon className="w-4 h-4" />
-                    ) : (
-                      <ClipboardIcon
-                        className="w-4 h-4 cursor-pointer"
-                        onClick={handleCopy}
-                      />
-                    )}
-                  </div>
-                  <p ref={dateTextRef}>
-                    Today's date is{" "}
-                    <span className="font-bold font-moderno uppercase">
-                      {gregorian.enDayOfWeek}, {hijri.hijriDay} {hijri.month}{" "}
-                      {hijri.year}AH in correspondent to {gregorian.enDayOfWeek}
-                      , {gregorian.gregorianDate.day}th of{" "}
-                      {gregorian.gregorianDate.monthName}{" "}
-                      {gregorian.gregorianDate.year}
-                      CE
-                    </span>
-                  </p>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </div>
         </div>
