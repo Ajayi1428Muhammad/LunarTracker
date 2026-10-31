@@ -9,7 +9,7 @@ async function TrackerContent () {
     await connection();
     const { gregorian, hijri } = getDate();
     return (
-      <div className="">
+      <div className="flex items-center justify-center h-screen p-5">
         <DateView gregorian={gregorian} hijri={hijri} />
       </div>
     );

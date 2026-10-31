@@ -83,26 +83,30 @@ const DateView = ({ gregorian, hijri }) => {
     }
   }
   return (
-    <div>
-      <button
-        onClick={handleCopyImage}
-        disabled={copyingShot}
-        className="flex items-center gap-2 px-4 py-2 bg-white text-black text-xs font-semibold rounded-xl hover:bg-neutral-200 transition-all active:scale-95 disabled:opacity-50 cursor-pointer"
-      >
-        {copiedShot ? (
-          <>
-            <CheckIcon className="w-4 h-4 text-emerald-600" />
-            <span>Image Copied to Clipboard!</span>
-          </>
-        ) : (
-          <>
-            <CameraIcon className="w-4 h-4 text-black" />
-            <span>{copyingShot ? "Capturing..." : "Copy Card as Image"}</span>
-          </>
-        )}
-      </button>
+    <div className="mb-2">
+      <div className="flex justify-end mr-2 mb-2 ">
+        <button
+          onClick={handleCopyImage}
+          disabled={copyingShot}
+          className="flex items-center gap-2 px-4 py-2 bg-white text-black text-xs font-semibold rounded-xs hover:bg-neutral-200 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+        >
+          {copiedShot ? (
+            <>
+              <CheckIcon className="w-4 h-4 text-emerald-600" />
+              <span>Image Copied to Clipboard!</span>
+            </>
+          ) : (
+            <>
+              <CameraIcon className="w-4 h-4 text-black" />
+              <span>
+                {copyingShot ? "Capturing..." : "View image magic ✨"}
+              </span>
+            </>
+          )}
+        </button>
+      </div>
       <div
-        className="flex flex-col items-center justify-center h-screen p-5"
+        className="flex flex-col justify-center items-center bg-black/10 p-4 border rounded-xl border-white/20"
         ref={cardRef}
       >
         {/* DateHead */}
