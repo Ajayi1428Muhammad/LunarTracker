@@ -113,7 +113,7 @@ const DateView = ({ gregorian, hijri }) => {
               {hijri.arDayOfWeek}
             </div>
             <div className="-mx-6 h-px bg-linear-to-r from-transparent via-white/50 to-transparent my-4 " />
-            <h1 className="md:text-9xl text-4xl">{hijri.hijriDay}</h1>
+            <h1 className="md:text-9xl text-4xl flex justify-center">{hijri.hijriDay}</h1>
           </div>
           {/* DateView */}
           <div className="w-[calc(100%-2rem)]  mx-auto">
